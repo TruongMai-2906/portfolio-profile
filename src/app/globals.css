@@ -3,8 +3,36 @@
 @tailwind utilities;
 
 :root {
+  --swiper-wrapper-transition-timing-function: linear;
   --background: #ffffff;
   --foreground: #171717;
+  --color-white: #ffffff;
+  --color-dark: #000000;
+
+  --color-orange1: #ff4800;
+  --color-orange2: #ff5400;
+  --color-orange3: #ff6000;
+  --color-orange4: #ff6d00;
+  --color-orange5: #ff7900;
+  --color-orange6: #ff8500;
+  --color-orange7: #ff9100;
+  --color-orange8: #ff9e00;
+  --color-orange9: #ffaa00;
+  --color-orange10: #ffb600;
+
+  --container-w: 87.5%;
+
+  @media (min-width: 640px) {
+    --container-w: clamp(540px, 87%, 960px);
+  }
+  
+  @media (min-width: 1280px) {
+    --container-w: clamp(1000px, 80%, 1440px);
+  }
+
+  @media (min-width: 2348px) {
+    --container-w: clamp(1440px, 65%, 1680px)
+  }
 }
 
 @media (prefers-color-scheme: dark) {
@@ -17,5 +45,10 @@
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-titillium-web);
+  font-size: 25px;
+}
+
+.swiper-wrapper {
+  transition-timing-function: linear;
 }
