@@ -1,10 +1,12 @@
 "use client";
 
+import { updateActiveSection } from "@/stores/reducers/activeSection";
 import { useGSAP } from "@gsap/react";
 import { useIntersectionObserver } from "@uidotdev/usehooks";
 import gsap from "gsap";
 import Image from "next/image";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useDispatch } from "react-redux";
 
 gsap.registerPlugin(useGSAP);
 
@@ -78,21 +80,56 @@ export default function HomepageHistory() {
       },
     ],
   };
+  const root = useRef(null);
+  const dispatch = useDispatch();
+  const [sectionViewed, setSectionViewed] = useState(false);
+
+  const [ref, entry] = useIntersectionObserver({
+    threshold: 0.2,
+    root: null,
+    rootMargin: "-100px",
+  });
+
+  useEffect(() => {
+    if (entry?.isIntersecting) {
+      dispatch(updateActiveSection("history"));
+      setSectionViewed(true);
+    }
+  }, [dispatch, entry]);
+
+  useGSAP(() => {
+    if (sectionViewed) {
+      gsap.fromTo(
+        root.current,
+        {
+          y: 300,
+          opacity: 0,
+        },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1.5,
+        }
+      );
+    }
+  }, [sectionViewed]);
 
   return (
-    <div className="py-16 px-x bg-grey">
-      <div className="font-primary text-xl font-bold tracking-custom text-center text-orange5">
-        {pageData.subtitle}
-      </div>
-      <h2 className="font-primary text-5xl font-bold text-center mt-6">
-        {pageData.title}
-      </h2>
-      <div className="mt-24 relative">
-        <div className="home-history__line absolute w-0.5 h-full bg-dark"></div>
-        <div className="flex flex-col gap-24 relative">
-          {pageData.history.map((item, index) => (
-            <HomepageHistoryItem key={index} {...item} />
-          ))}
+    <div ref={ref}>
+      <div className="py-8 lg:py-16 px-x bg-grey opacity-0" ref={root}>
+        <div className="font-primary text-xl font-bold tracking-custom text-center text-orange5">
+          {pageData.subtitle}
+        </div>
+        <h2 className="font-primary text-4xl lg:text-5xl font-bold text-center mt-6">
+          {pageData.title}
+        </h2>
+        <div className="mt-24 relative">
+          <div className="home-history__line absolute w-0.5 h-full bg-dark"></div>
+          <div className="flex flex-col gap-24 relative">
+            {pageData.history.map((item, index) => (
+              <HomepageHistoryItem key={index} {...item} />
+            ))}
+          </div>
         </div>
       </div>
     </div>

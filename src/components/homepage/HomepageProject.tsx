@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { Swiper, SwiperRef, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -11,6 +11,9 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { clsx } from "clsx";
 import Image from "next/image";
+import { useDispatch } from "react-redux";
+import { useIntersectionObserver } from "@uidotdev/usehooks";
+import { updateActiveSection } from "@/stores/reducers/activeSection";
 
 interface SlideDataType {
   image: string;
@@ -30,22 +33,22 @@ export default function HomepageProject() {
       link: "https://disneyspeedstorm.com/",
     },
     {
-      image: "/assets/images/project-disney-dreamlight-valley.jpg",
-      title: "Disney Dreamlight Valley News",
-      description: "",
-      link: "https://disneydreamlightvalley.com/news",
-    },
-    {
       image: "/assets/images/project-gangstar.jpg",
       title: "Gangstar New York Landing Page",
       description: "",
       link: "https://gangstarny.com/",
     },
     {
-      image: "/assets/images/project-dml.jpg",
-      title: "Dragon Mania Legend Website",
+      image: "/assets/images/project-disney-dreamlight-valley.jpg",
+      title: "Disney Dreamlight Valley News",
       description: "",
-      link: "https://dragonmanialegends.com/",
+      link: "https://disneydreamlightvalley.com/news",
+    },
+    {
+      image: "/assets/images/project-tot.jpg",
+      title: "The Oregon Trail Migration",
+      description: "",
+      link: "https://theoregontrail-game.com/",
     },
     {
       image: "/assets/images/project-we-belong-here.jpg",
@@ -119,10 +122,28 @@ export default function HomepageProject() {
       description: "",
       link: "https://katalon.com/ebooks/the-beginners-guide-to-mobile-testing",
     },
+    {
+      image: "/assets/images/project-dml.jpg",
+      title: "Dragon Mania Legend Website",
+      description: "",
+      link: "https://dragonmanialegends.com/",
+    },
   ];
 
   const slideRef = useRef<SwiperRef>(null);
   const [indexSlide, setIndexSlide] = useState(0);
+  const dispatch = useDispatch();
+  const [ref, entry] = useIntersectionObserver({
+    threshold: 0.2,
+    root: null,
+    rootMargin: "0px",
+  });
+
+  useEffect(() => {
+    if (entry?.isIntersecting) {
+      dispatch(updateActiveSection("project"));
+    }
+  }, [dispatch, entry]);
 
   const onSlidePrev = () => {
     slideRef.current?.swiper.slidePrev();
@@ -137,19 +158,19 @@ export default function HomepageProject() {
   };
 
   return (
-    <div className="py-16 px-x">
+    <div className="py-8 lg:py-16 px-x" ref={ref}>
       <div className="font-primary text-xl font-bold tracking-custom text-center text-orange5">
         PROJECT
       </div>
-      <h2 className="font-primary text-5xl font-bold text-center mt-6">
+      <h2 className="font-primary text-4xl lg:text-5xl font-bold text-center mt-6">
         Transforming Ideas into Interactive Reality
       </h2>
       <div className="mt-12">
         <div className="font-primary text-base font-normal">
           <Swiper
-            className="!py-10"
+            className="lg:!py-10"
             spaceBetween={10}
-            slidesPerView={"auto"}
+            slidesPerView={1}
             breakpoints={{
               1024: {
                 slidesPerView: 3,
@@ -160,7 +181,6 @@ export default function HomepageProject() {
             centeredSlides={true}
             freeMode={true}
             onSlideChange={(swiper) => setIndexSlide(swiper.realIndex)}
-            onSwiper={(swiper) => console.log(swiper)}
             ref={slideRef}
           >
             {slideData.map((slide, index) => (
@@ -168,7 +188,9 @@ export default function HomepageProject() {
                 <a
                   className={clsx(
                     "flex flex-col gap-4 justify-center items-center",
-                    indexSlide === index && "transition-all scale-110"
+                    (indexSlide === index ||
+                      (indexSlide === -1 && index === 0)) &&
+                      "transition-all lg:scale-110"
                   )}
                   href={slide.link}
                   target="_blank"
@@ -176,18 +198,19 @@ export default function HomepageProject() {
                 >
                   <div
                     className={clsx(
-                      "w-96 h-56 border-2 border-dark rounded-lg overflow-hidden",
+                      "w-96 max-w-full aspect-[384/224] border-2 border-dark rounded-lg overflow-hidden",
                       indexSlide === index && "border-dark"
                     )}
                   >
                     <Image
+                      className="w-full h-full object-cover transition-all duration-500 hover:scale-105"
                       src={slide.image}
                       alt="image"
-                      width={380}
-                      height={220}
+                      width={760}
+                      height={440}
                     />
                   </div>
-                  <div className="font-primary text-xl font-bold">
+                  <div className="font-primary text-xl font-bold text-center">
                     {slide.title}
                   </div>
                   <div className="font-primary text-base font-normal text-center">
@@ -198,15 +221,15 @@ export default function HomepageProject() {
             ))}
           </Swiper>
 
-          <div className="flex justify-center gap-5 mt-8">
+          <div className="flex justify-center gap-5 lg:mt-8">
             <div
-              className="w-8 h-8 border-2 border-dark rounded-full flex justify-center items-center cursor-pointer transition-all hover:scale-110"
+              className="w-10 h-10 border-2 border-dark rounded-full flex justify-center items-center cursor-pointer transition-all hover:scale-110"
               onClick={() => onSlidePrev()}
             >
               <FontAwesomeIcon icon="chevron-left" />
             </div>
             <div
-              className="w-8 h-8 border-2 border-dark rounded-full flex justify-center items-center cursor-pointer transition-all hover:scale-110"
+              className="w-10 h-10 border-2 border-dark rounded-full flex justify-center items-center cursor-pointer transition-all hover:scale-110"
               onClick={() => onSlideNext()}
             >
               <FontAwesomeIcon icon="chevron-right" />

@@ -8,6 +8,8 @@ import HomepageHistory from "@/components/homepage/HomepageHistory";
 import HomepageProject from "@/components/homepage/HomepageProject";
 import { scrollTo } from "@/utils/utils";
 import { RefObject, useRef } from "react";
+import { Provider } from "react-redux";
+import { store } from "@/stores/store";
 
 import "@/components/homepage/Homepage.css";
 import HomepageTechnology from "@/components/homepage/HomepageTechnology";
@@ -18,7 +20,6 @@ interface RefListType {
     offset?: number;
   };
 }
-
 export default function Home() {
   const BannerRef = useRef<HTMLDivElement | null>(null);
   const TechnologyRef = useRef<HTMLDivElement | null>(null);
@@ -53,27 +54,29 @@ export default function Home() {
   };
 
   return (
-    <div>
-      <Header onHeaderClick={(key) => handleScrollTo(key)} />
-      <div ref={BannerRef}>
-        <HomepageBanner
-          onContactClick={() => handleScrollTo("contactUs")}
-          onScrollDownClick={() => handleScrollTo("technology")}
-        />
+    <Provider store={store}>
+      <div className="overflow-hidden">
+        <Header onHeaderClick={(key) => handleScrollTo(key)} />
+        <div ref={BannerRef}>
+          <HomepageBanner
+            onContactClick={() => handleScrollTo("contactUs")}
+            onScrollDownClick={() => handleScrollTo("technology")}
+          />
+        </div>
+        <div ref={TechnologyRef}>
+          <HomepageTechnology />
+        </div>
+        <div ref={HistoryRef}>
+          <HomepageHistory />
+        </div>
+        <div ref={ProjectRef}>
+          <HomepageProject />
+        </div>
+        <div ref={ContactUsRef}>
+          <HomepageContactUs />
+        </div>
+        <Footer />
       </div>
-      <div ref={TechnologyRef}>
-        <HomepageTechnology />
-      </div>
-      <div ref={HistoryRef}>
-        <HomepageHistory />
-      </div>
-      <div ref={ProjectRef}>
-        <HomepageProject />
-      </div>
-      <div ref={ContactUsRef}>
-        <HomepageContactUs />
-      </div>
-      <Footer />
-    </div>
+    </Provider>
   );
 }

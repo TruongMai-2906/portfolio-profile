@@ -50,7 +50,6 @@ export default function DesignBaseSlider() {
             centeredSlides={true}
             freeMode={true}
             onSlideChange={(swiper) => setIndexSlide(swiper.realIndex)}
-            onSwiper={(swiper) => console.log(swiper)}
             ref={slideRef}
           >
             <SwiperSlide>

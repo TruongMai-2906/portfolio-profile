@@ -4,7 +4,10 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
+import { useIntersectionObserver } from "@uidotdev/usehooks";
+import { useDispatch } from "react-redux";
+import { updateActiveSection } from "@/stores/reducers/activeSection";
 
 library.add(faChevronDown);
 gsap.registerPlugin(useGSAP);
@@ -15,6 +18,13 @@ interface HomepageBannerPropDataType {
 }
 
 export default function HomepageBanner(props: HomepageBannerPropDataType) {
+  const dispatch = useDispatch();
+  const [ref, entry] = useIntersectionObserver({
+    threshold: 0,
+    root: null,
+    rootMargin: "0px",
+  });
+
   const tl = gsap.timeline();
   const tlText = gsap.timeline();
   const arrow1Ref = useRef(null);
@@ -29,7 +39,7 @@ export default function HomepageBanner(props: HomepageBannerPropDataType) {
     tlText.to(
       edgeLeftRef.current,
       {
-        x: -180,
+        x: window.innerWidth < 1024 ? -100 : -180,
         duration: 2,
       },
       "start"
@@ -37,14 +47,14 @@ export default function HomepageBanner(props: HomepageBannerPropDataType) {
     tlText.to(
       edgeRightRef.current,
       {
-        x: 180,
+        x: window.innerWidth < 1024 ? 100 : 180,
         duration: 2,
       },
       "start"
     );
     tlText.to(textRef.current, {
       y: 0,
-      duration: 1,
+      duration: 0.7,
     });
 
     tl.to(arrow3Ref.current, {
@@ -87,8 +97,17 @@ export default function HomepageBanner(props: HomepageBannerPropDataType) {
     tl.repeat(-1);
   }, []);
 
+  useEffect(() => {
+    if (entry?.isIntersecting) {
+      dispatch(updateActiveSection("banner"));
+    }
+  }, [dispatch, entry]);
+
   return (
-    <div className="px-x h-screen py-16 flex flex-col gap-16 justify-center items-center relative overflow-hidden">
+    <div
+      className="px-x h-screen py-8 lg:py-16 flex flex-col gap-16 justify-center items-center relative overflow-hidden"
+      ref={ref}
+    >
       <div className="absolute top-0 left-0 w-full h-full -z-10 filter blur after:absolute after:top-0 after:left-0 after:w-full after:h-full after:-z-0 after:bg-black after:opacity-50">
         <Image
           className="w-full h-full object-cover"
@@ -98,11 +117,11 @@ export default function HomepageBanner(props: HomepageBannerPropDataType) {
           height={1080}
         />
       </div>
-      <div className="flex flex-col gap-6">
-        <h1 className="font-primary text-6xl font-bold text-center text-white">
+      <div className="flex flex-col gap-3 lg:gap-6">
+        <h1 className="font-primary text-4xl lg:text-6xl font-bold text-center text-white">
           Hi, I&apos;m Truong,
         </h1>
-        <div className="relative font-primary text-5xl font-bold text-center text-orange8">
+        <div className="relative font-primary text-3xl lg:text-5xl font-bold text-center text-orange8">
           <div className="flex justify-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
             <Image
               className="translate-y-2"
@@ -128,7 +147,7 @@ export default function HomepageBanner(props: HomepageBannerPropDataType) {
           </div>
         </div>
       </div>
-      <div className="flex justify-center gap-6">
+      <div className="flex justify-center gap-6 flex-wrap">
         <a
           href="/assets/files/Frontend Developer - Be Lam Mai Truong.pdf"
           download={true}
