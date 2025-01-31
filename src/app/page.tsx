@@ -21,6 +21,7 @@ interface RefListType {
 
 export default function Home() {
   const BannerRef = useRef<HTMLDivElement | null>(null);
+  const TechnologyRef = useRef<HTMLDivElement | null>(null);
   const ProjectRef = useRef<HTMLDivElement | null>(null);
   const HistoryRef = useRef<HTMLDivElement | null>(null);
   const ContactUsRef = useRef<HTMLDivElement | null>(null);
@@ -28,6 +29,10 @@ export default function Home() {
   const refList: RefListType = {
     banner: {
       ref: BannerRef,
+    },
+    technology: {
+      ref: TechnologyRef,
+      offset: 40,
     },
     project: {
       ref: ProjectRef,
@@ -42,22 +47,28 @@ export default function Home() {
       offset: 40,
     },
   };
+
+  const handleScrollTo = (key: string) => {
+    scrollTo(refList[key].ref, refList[key].offset || 0);
+  };
+
   return (
     <div>
-      <Header
-        onHeaderClick={(key) =>
-          scrollTo(refList[key].ref, refList[key].offset || 0)
-        }
-      />
+      <Header onHeaderClick={(key) => handleScrollTo(key)} />
       <div ref={BannerRef}>
-        <HomepageBanner />
-        <HomepageTechnology />
+        <HomepageBanner
+          onContactClick={() => handleScrollTo("contactUs")}
+          onScrollDownClick={() => handleScrollTo("technology")}
+        />
       </div>
-      <div ref={ProjectRef}>
-        <HomepageProject />
+      <div ref={TechnologyRef}>
+        <HomepageTechnology />
       </div>
       <div ref={HistoryRef}>
         <HomepageHistory />
+      </div>
+      <div ref={ProjectRef}>
+        <HomepageProject />
       </div>
       <div ref={ContactUsRef}>
         <HomepageContactUs />

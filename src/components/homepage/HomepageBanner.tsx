@@ -9,13 +9,44 @@ import { useRef } from "react";
 library.add(faChevronDown);
 gsap.registerPlugin(useGSAP);
 
-export default function HomepageBanner() {
+interface HomepageBannerPropDataType {
+  onContactClick: () => void;
+  onScrollDownClick: () => void;
+}
+
+export default function HomepageBanner(props: HomepageBannerPropDataType) {
   const tl = gsap.timeline();
+  const tlText = gsap.timeline();
   const arrow1Ref = useRef(null);
   const arrow2Ref = useRef(null);
   const arrow3Ref = useRef(null);
 
+  const edgeLeftRef = useRef(null);
+  const edgeRightRef = useRef(null);
+  const textRef = useRef(null);
+
   useGSAP(() => {
+    tlText.to(
+      edgeLeftRef.current,
+      {
+        x: -180,
+        duration: 2,
+      },
+      "start"
+    );
+    tlText.to(
+      edgeRightRef.current,
+      {
+        x: 180,
+        duration: 2,
+      },
+      "start"
+    );
+    tlText.to(textRef.current, {
+      y: 0,
+      duration: 1,
+    });
+
     tl.to(arrow3Ref.current, {
       opacity: 1,
       y: 10,
@@ -69,22 +100,54 @@ export default function HomepageBanner() {
       </div>
       <div className="flex flex-col gap-6">
         <h1 className="font-primary text-6xl font-bold text-center text-white">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          Hi, I&apos;m Truong,
         </h1>
-        <h2 className="font-primary text-5xl font-bold text-center text-orange8">
-          Web Developer
-        </h2>
+        <div className="relative font-primary text-5xl font-bold text-center text-orange8">
+          <div className="flex justify-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+            <Image
+              className="translate-y-2"
+              ref={edgeLeftRef}
+              src="/assets/images/icon-edge-left.svg"
+              alt="icon"
+              width={30}
+              height={30}
+            />
+            <Image
+              className="-translate-y-2"
+              ref={edgeRightRef}
+              src="/assets/images/icon-edge-right.svg"
+              alt="icon"
+              width={30}
+              height={30}
+            />
+          </div>
+          <div className="overflow-hidden">
+            <div className="mx-auto relative translate-y-12" ref={textRef}>
+              Web Developer
+            </div>
+          </div>
+        </div>
       </div>
       <div className="flex justify-center gap-6">
-        <div className="font-primary text-lg font-semibold text-grey px-6 py-2 rounded-3xl cursor-pointer transition-all border-2 border-orange5 bg-orange5 hover:bg-orange8 hover:border-orange8">
-          Primary
-        </div>
-        <div className="font-primary text-lg font-semibold text-orange8 px-6 py-2 rounded-3xl cursor-pointer transition-all border-2 border-orange5 hover:bg-grey">
-          Secondary
+        <a
+          href="/assets/files/Frontend Developer - Be Lam Mai Truong.pdf"
+          download={true}
+          className="font-primary text-lg font-semibold text-grey px-6 py-2 rounded-3xl cursor-pointer transition-all border-2 border-orange8 bg-orange8 hover:bg-orange5 hover:border-orange5"
+        >
+          Download My Resume
+        </a>
+        <div
+          className="font-primary text-lg font-semibold text-orange8 px-6 py-2 rounded-3xl cursor-pointer transition-all border-2 border-orange8 hover:border-white hover:text-white"
+          onClick={() => props.onContactClick()}
+        >
+          Contact Me
         </div>
       </div>
 
-      <div className="arrows absolute bottom-11 left-1/2 -translate-x-1/2">
+      <div
+        className="arrows absolute bottom-11 left-1/2 -translate-x-1/2 cursor-pointer"
+        onClick={() => props.onScrollDownClick()}
+      >
         <div className="flex opacity-0 translate-y-0" ref={arrow1Ref}>
           <FontAwesomeIcon icon="chevron-down" color="#ff7900" />
         </div>

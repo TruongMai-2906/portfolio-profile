@@ -10,10 +10,12 @@ import {
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
 import { clsx } from "clsx";
+import Image from "next/image";
 
 interface SlideDataType {
   image: string;
   title: string;
+  link: string;
   description?: string;
 }
 
@@ -22,34 +24,100 @@ library.add(faChevronLeft, faChevronRight);
 export default function HomepageProject() {
   const slideData: SlideDataType[] = [
     {
-      image: "",
-      title: "Slide 1",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vitae hendrerit erat. Aliquam condimentum ipsum luctus, convallis nunc ac, aliquam mi. Pellentesque sem libero, eleifend at vulputate at, bibendum vitae lacus. Fusce vulputate nec arcu et hendrerit. Suspendisse tincidunt iaculis nibh, non cursus sem semper vitae.",
+      image: "/assets/images/project-disney-speedstorm.jpg",
+      title: "Disney Speedstorm Website",
+      description: "",
+      link: "https://disneyspeedstorm.com/",
     },
     {
-      image: "",
-      title: "Slide 2",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vitae hendrerit erat. Aliquam condimentum ipsum luctus, convallis nunc ac, aliquam mi. Pellentesque sem libero, eleifend at vulputate at, bibendum vitae lacus. Fusce vulputate nec arcu et hendrerit. Suspendisse tincidunt iaculis nibh, non cursus sem semper vitae.",
+      image: "/assets/images/project-disney-dreamlight-valley.jpg",
+      title: "Disney Dreamlight Valley News",
+      description: "",
+      link: "https://disneydreamlightvalley.com/news",
     },
     {
-      image: "",
-      title: "Slide 3",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vitae hendrerit erat. Aliquam condimentum ipsum luctus, convallis nunc ac, aliquam mi. Pellentesque sem libero, eleifend at vulputate at, bibendum vitae lacus. Fusce vulputate nec arcu et hendrerit. Suspendisse tincidunt iaculis nibh, non cursus sem semper vitae.",
+      image: "/assets/images/project-gangstar.jpg",
+      title: "Gangstar New York Landing Page",
+      description: "",
+      link: "https://gangstarny.com/",
     },
     {
-      image: "",
-      title: "Slide 4",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vitae hendrerit erat. Aliquam condimentum ipsum luctus, convallis nunc ac, aliquam mi. Pellentesque sem libero, eleifend at vulputate at, bibendum vitae lacus. Fusce vulputate nec arcu et hendrerit. Suspendisse tincidunt iaculis nibh, non cursus sem semper vitae.",
+      image: "/assets/images/project-dml.jpg",
+      title: "Dragon Mania Legend Website",
+      description: "",
+      link: "https://dragonmanialegends.com/",
     },
     {
-      image: "",
-      title: "Slide 5",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vitae hendrerit erat. Aliquam condimentum ipsum luctus, convallis nunc ac, aliquam mi. Pellentesque sem libero, eleifend at vulputate at, bibendum vitae lacus. Fusce vulputate nec arcu et hendrerit. Suspendisse tincidunt iaculis nibh, non cursus sem semper vitae.",
+      image: "/assets/images/project-we-belong-here.jpg",
+      title: "Gameloft We Belong Here Landing Page",
+      description: "",
+      link: "https://www.gameloft.com/promotions/we-belong-here",
+    },
+    {
+      image: "/assets/images/project-gameloft-studio.jpg",
+      title: "Gameloft Studio Landing Page",
+      description: "",
+      link: "https://www.gameloft.com/gameloft-studios/brisbane",
+    },
+    {
+      image: "/assets/images/project-redeem.jpg",
+      title: "Gameloft Redeem Code",
+      description: "",
+      link: "https://www.gameloft.com/redeem/war-planet-online",
+    },
+    {
+      image: "/assets/images/project-for-brand.jpg",
+      title: "Gameloft For Brand Migration",
+      description: "",
+      link: "https://www.gameloft.com/for-brands",
+    },
+    {
+      image: "/assets/images/project-gbs.jpg",
+      title: "Gameloft Business Solution Migration",
+      description: "",
+      link: "https://www.gameloft.com/business-solutions",
+    },
+    {
+      image: "/assets/images/project-1k.jpg",
+      title: "Katalon 1K Studio Promo",
+      description: "",
+      link: "https://katalon.com/1k-studio-promo",
+    },
+    {
+      image: "/assets/images/project-enterprise.jpg",
+      title: "Katalon Enterprise Landing Page",
+      description: "",
+      link: "https://katalon.com/enterprise",
+    },
+    {
+      image: "/assets/images/project-testcon.jpg",
+      title: "TestCon Vietnam 2024",
+      description: "",
+      link: "https://www.testcon.net/",
+    },
+    {
+      image: "/assets/images/project-web-testing.jpg",
+      title: "Katalon Web Testing Landing Page",
+      description: "",
+      link: "https://katalon.com/web-testing",
+    },
+    {
+      image: "/assets/images/project-idea-exchange.jpg",
+      title: "Katalon Idea Exchange Website",
+      description: "",
+      link: "https://katalon.com/idea-exchange",
+    },
+    {
+      image: "/assets/images/project-view-demo.jpg",
+      title: "Katalon View A Demo Landing Page",
+      description: "",
+      link: "https://katalon.com/view-a-demo",
+    },
+    {
+      image: "/assets/images/project-ebook.jpg",
+      title: "Katalon Ebook Landing Page",
+      description: "",
+      link: "https://katalon.com/ebooks/the-beginners-guide-to-mobile-testing",
     },
   ];
 
@@ -74,7 +142,7 @@ export default function HomepageProject() {
         PROJECT
       </div>
       <h2 className="font-primary text-5xl font-bold text-center mt-6">
-        View more about my project
+        Transforming Ideas into Interactive Reality
       </h2>
       <div className="mt-12">
         <div className="font-primary text-base font-normal">
@@ -97,20 +165,35 @@ export default function HomepageProject() {
           >
             {slideData.map((slide, index) => (
               <SwiperSlide key={index}>
-                <div
+                <a
                   className={clsx(
                     "flex flex-col gap-4 justify-center items-center",
                     indexSlide === index && "transition-all scale-110"
                   )}
+                  href={slide.link}
+                  target="_blank"
+                  rel="noreferrer noopener"
                 >
-                  <div className="w-96 h-56 border-2 border-grey rounded-lg bg-strong-pink"></div>
+                  <div
+                    className={clsx(
+                      "w-96 h-56 border-2 border-dark rounded-lg overflow-hidden",
+                      indexSlide === index && "border-dark"
+                    )}
+                  >
+                    <Image
+                      src={slide.image}
+                      alt="image"
+                      width={380}
+                      height={220}
+                    />
+                  </div>
                   <div className="font-primary text-xl font-bold">
                     {slide.title}
                   </div>
                   <div className="font-primary text-base font-normal text-center">
                     {slide.description}
                   </div>
-                </div>
+                </a>
               </SwiperSlide>
             ))}
           </Swiper>

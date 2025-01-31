@@ -20,12 +20,18 @@ export default function HomepageContactUs() {
   return (
     <div className="py-16 px-x pb-20">
       <div className="font-primary text-xl font-bold tracking-custom text-center text-orange5">
-        CONTACT US
+        CONTACT ME
       </div>
       <h2 className="font-primary text-5xl font-bold text-center mt-6">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        Ready to Transform Ideas Into Interactive Reality?
         <br />
       </h2>
+      <div className="font-primary text-xl font-normal text-center mt-6">
+        I&apos;m eager to bring innovative designs to life with clean, efficient
+        code and a keen eye for aesthetics. Whether you have a question, a
+        project, or just want to chat about the latest in web development, drop
+        me a line, and let&apos;s create something extraordinary together.
+      </div>
       <div className="mt-16 flex flex-col justify-center items-center">
         <form
           className="flex flex-col gap-6 w-full max-w-4xl justify-center items-center"

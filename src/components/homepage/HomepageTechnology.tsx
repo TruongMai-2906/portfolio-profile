@@ -89,7 +89,7 @@ export default function HomepageTechnology() {
   ];
 
   return (
-    <div className="px-x py-16">
+    <div className="pt-16 pb-12">
       <div className="font-primary text-xl font-bold tracking-custom text-center text-orange5">
         TECHNOLOGY
       </div>
@@ -97,11 +97,15 @@ export default function HomepageTechnology() {
         <Swiper
           spaceBetween={0}
           slidesPerView={1}
+          direction="horizontal"
           speed={5000}
+          loop={true}
+          freeMode={false}
+          draggable={false}
           autoplay={{
             delay: 0,
           }}
-          direction="horizontal"
+          noSwiping={true}
           breakpoints={{
             640: {
               slidesPerView: 2,
@@ -110,18 +114,17 @@ export default function HomepageTechnology() {
               slidesPerView: 3,
             },
             1024: {
-              slidesPerView: 6,
+              slidesPerView: 8,
             },
           }}
-          loop={true}
-          freeMode={true}
           ref={slideRef}
           modules={[Autoplay]}
         >
           {technologyData.map((technology, index) => (
-            <SwiperSlide key={index}>
-              <div className="flex justify-center items-center">
+            <SwiperSlide key={index} className="swiper-no-swiping">
+              <div className="flex justify-center items-center py-7">
                 <Image
+                  className="transition-all hover:scale-110"
                   src={technology.image}
                   alt={technology.alt}
                   width={100}

@@ -12,13 +12,7 @@ export default function Header({ onHeaderClick }: HeaderPropsType) {
             className="font-primary text-xl font-bold cursor-pointer"
             onClick={() => onHeaderClick("banner")}
           >
-            Banner
-          </div>
-          <div
-            className="font-primary text-xl font-bold cursor-pointer"
-            onClick={() => onHeaderClick("project")}
-          >
-            Project
+            Home
           </div>
           <div
             className="font-primary text-xl font-bold cursor-pointer"
@@ -28,9 +22,15 @@ export default function Header({ onHeaderClick }: HeaderPropsType) {
           </div>
           <div
             className="font-primary text-xl font-bold cursor-pointer"
+            onClick={() => onHeaderClick("project")}
+          >
+            Project
+          </div>
+          <div
+            className="font-primary text-xl font-bold cursor-pointer"
             onClick={() => onHeaderClick("contactUs")}
           >
-            Contact Us
+            Contact Me
           </div>
         </div>
       </div>
