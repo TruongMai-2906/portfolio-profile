@@ -11,9 +11,11 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { clsx } from "clsx";
 import Image from "next/image";
+import gsap from "gsap";
 import { useDispatch } from "react-redux";
 import { useIntersectionObserver } from "@uidotdev/usehooks";
 import { updateActiveSection } from "@/stores/reducers/activeSection";
+import { useGSAP } from "@gsap/react";
 
 interface SlideDataType {
   image: string;
@@ -130,8 +132,10 @@ export default function HomepageProject() {
     },
   ];
 
+  const root = useRef(null);
   const slideRef = useRef<SwiperRef>(null);
   const [indexSlide, setIndexSlide] = useState(0);
+  const [sectionViewed, setSectionViewed] = useState(false);
   const dispatch = useDispatch();
   const [ref, entry] = useIntersectionObserver({
     threshold: 0.2,
@@ -142,8 +146,26 @@ export default function HomepageProject() {
   useEffect(() => {
     if (entry?.isIntersecting) {
       dispatch(updateActiveSection("project"));
+      setSectionViewed(true);
     }
   }, [dispatch, entry]);
+
+  useGSAP(() => {
+    if (sectionViewed) {
+      gsap.fromTo(
+        root.current,
+        {
+          y: 300,
+          opacity: 0,
+        },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1.5,
+        }
+      );
+    }
+  }, [sectionViewed]);
 
   const onSlidePrev = () => {
     slideRef.current?.swiper.slidePrev();
@@ -158,81 +180,97 @@ export default function HomepageProject() {
   };
 
   return (
-    <div className="py-8 lg:py-16 px-x" ref={ref}>
-      <div className="font-primary text-xl font-bold tracking-custom text-center text-orange5">
-        PROJECT
-      </div>
-      <h2 className="font-primary text-4xl lg:text-5xl font-bold text-center mt-6">
-        Transforming Ideas into Interactive Reality
-      </h2>
-      <div className="mt-12">
-        <div className="font-primary text-base font-normal">
-          <Swiper
-            className="lg:!py-10"
-            spaceBetween={10}
-            slidesPerView={1}
-            breakpoints={{
-              1024: {
-                slidesPerView: 3,
-                spaceBetween: 50,
-              },
-            }}
-            loop={true}
-            centeredSlides={true}
-            freeMode={true}
-            onSlideChange={(swiper) => setIndexSlide(swiper.realIndex)}
-            ref={slideRef}
-          >
-            {slideData.map((slide, index) => (
-              <SwiperSlide key={index}>
-                <a
-                  className={clsx(
-                    "flex flex-col gap-4 justify-center items-center",
-                    (indexSlide === index ||
-                      (indexSlide === -1 && index === 0)) &&
-                      "transition-all lg:scale-110"
-                  )}
-                  href={slide.link}
-                  target="_blank"
-                  rel="noreferrer noopener"
-                >
-                  <div
+    <div ref={ref}>
+      <div className="py-8 lg:py-16 px-x opacity-0" ref={root}>
+        <div className="font-primary text-xl font-bold tracking-custom text-center text-orange5">
+          PROJECT
+        </div>
+        <h2 className="font-primary text-4xl lg:text-5xl font-bold text-center mt-6 flex gap-4 justify-center items-center">
+          <Image
+            className=""
+            src={"assets/images/flash.svg"}
+            alt="logo"
+            width={60}
+            height={60}
+          />
+          Transforming Ideas into Interactive Reality
+          <Image
+            className=""
+            src={"assets/images/flash.svg"}
+            alt="logo"
+            width={60}
+            height={60}
+          />
+        </h2>
+        <div className="mt-12">
+          <div className="font-primary text-base font-normal">
+            <Swiper
+              className="lg:!py-10"
+              spaceBetween={10}
+              slidesPerView={1}
+              breakpoints={{
+                1024: {
+                  slidesPerView: 3,
+                  spaceBetween: 50,
+                },
+              }}
+              loop={true}
+              centeredSlides={true}
+              freeMode={true}
+              onSlideChange={(swiper) => setIndexSlide(swiper.realIndex)}
+              ref={slideRef}
+            >
+              {slideData.map((slide, index) => (
+                <SwiperSlide key={index}>
+                  <a
                     className={clsx(
-                      "w-96 max-w-full aspect-[384/224] border-2 border-dark rounded-lg overflow-hidden",
-                      indexSlide === index && "border-dark"
+                      "flex flex-col gap-4 justify-center items-center",
+                      (indexSlide === index ||
+                        (indexSlide === -1 && index === 0)) &&
+                        "transition-all lg:scale-110"
                     )}
+                    href={slide.link}
+                    target="_blank"
+                    rel="noreferrer noopener"
                   >
-                    <Image
-                      className="w-full h-full object-cover transition-all duration-500 hover:scale-105"
-                      src={slide.image}
-                      alt="image"
-                      width={760}
-                      height={440}
-                    />
-                  </div>
-                  <div className="font-primary text-xl font-bold text-center">
-                    {slide.title}
-                  </div>
-                  <div className="font-primary text-base font-normal text-center">
-                    {slide.description}
-                  </div>
-                </a>
-              </SwiperSlide>
-            ))}
-          </Swiper>
+                    <div
+                      className={clsx(
+                        "w-96 max-w-full aspect-[384/224] border-2 border-dark rounded-lg overflow-hidden shadow-xl",
+                        indexSlide === index && "border-dark"
+                      )}
+                    >
+                      <Image
+                        className="w-full h-full object-cover transition-all duration-500 hover:scale-105"
+                        src={slide.image}
+                        alt="image"
+                        width={760}
+                        height={440}
+                      />
+                    </div>
+                    <div className="font-primary text-xl font-bold text-center">
+                      {slide.title}
+                    </div>
+                    <div className="font-primary text-base font-normal text-center">
+                      {slide.description}
+                    </div>
+                  </a>
+                </SwiperSlide>
+              ))}
+            </Swiper>
 
-          <div className="flex justify-center gap-5 lg:mt-8">
-            <div
-              className="w-10 h-10 border-2 border-dark rounded-full flex justify-center items-center cursor-pointer transition-all hover:scale-110"
-              onClick={() => onSlidePrev()}
-            >
-              <FontAwesomeIcon icon="chevron-left" />
-            </div>
-            <div
-              className="w-10 h-10 border-2 border-dark rounded-full flex justify-center items-center cursor-pointer transition-all hover:scale-110"
-              onClick={() => onSlideNext()}
-            >
-              <FontAwesomeIcon icon="chevron-right" />
+            <div className="flex justify-center gap-5 lg:mt-8">
+              <div
+                className="w-10 h-10 border-2 border-dark rounded-full flex justify-center items-center cursor-pointer transition-all hover:scale-110"
+                onClick={() => onSlidePrev()}
+              >
+                <FontAwesomeIcon icon="chevron-left" />
+              </div>
+              <div
+                className="w-10 h-10 border-2 border-dark rounded-full flex justify-center items-center cursor-pointer transition-all hover:scale-110"
+                onClick={() => onSlideNext()}
+              >
+                <FontAwesomeIcon icon="chevron-right" />
+              </div>
             </div>
           </div>
         </div>

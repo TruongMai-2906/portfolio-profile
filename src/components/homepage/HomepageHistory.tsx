@@ -116,12 +116,26 @@ export default function HomepageHistory() {
 
   return (
     <div ref={ref}>
-      <div className="py-8 lg:py-16 px-x bg-grey opacity-0" ref={root}>
+      <div className="py-8 lg:py-16 px-x opacity-0" ref={root}>
         <div className="font-primary text-xl font-bold tracking-custom text-center text-orange5">
           {pageData.subtitle}
         </div>
-        <h2 className="font-primary text-4xl lg:text-5xl font-bold text-center mt-6">
+        <h2 className="font-primary text-4xl lg:text-5xl font-bold text-center mt-6 flex gap-4 justify-center items-center">
+          <Image
+            className=""
+            src={"assets/images/flash.svg"}
+            alt="logo"
+            width={60}
+            height={60}
+          />
           {pageData.title}
+          <Image
+            className=""
+            src={"assets/images/flash.svg"}
+            alt="logo"
+            width={60}
+            height={60}
+          />
         </h2>
         <div className="mt-24 relative">
           <div className="home-history__line absolute w-0.5 h-full bg-dark"></div>

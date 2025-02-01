@@ -20,9 +20,9 @@ interface HomepageBannerPropDataType {
 export default function HomepageBanner(props: HomepageBannerPropDataType) {
   const dispatch = useDispatch();
   const [ref, entry] = useIntersectionObserver({
-    threshold: 0,
+    threshold: 0.2,
     root: null,
-    rootMargin: "0px",
+    rootMargin: "-100px",
   });
 
   const tl = gsap.timeline();

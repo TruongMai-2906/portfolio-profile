@@ -13,6 +13,8 @@ import { store } from "@/stores/store";
 
 import "@/components/homepage/Homepage.css";
 import HomepageTechnology from "@/components/homepage/HomepageTechnology";
+import HomepageAboutMe from "@/components/homepage/HomepageAboutMe";
+import StickyContact from "@/components/commons/StickyContact";
 
 interface RefListType {
   [key: string]: {
@@ -22,6 +24,7 @@ interface RefListType {
 }
 export default function Home() {
   const BannerRef = useRef<HTMLDivElement | null>(null);
+  const AboutMeRef = useRef<HTMLDivElement | null>(null);
   const TechnologyRef = useRef<HTMLDivElement | null>(null);
   const ProjectRef = useRef<HTMLDivElement | null>(null);
   const HistoryRef = useRef<HTMLDivElement | null>(null);
@@ -30,6 +33,10 @@ export default function Home() {
   const refList: RefListType = {
     banner: {
       ref: BannerRef,
+    },
+    aboutMe: {
+      ref: AboutMeRef,
+      offset: 40,
     },
     technology: {
       ref: TechnologyRef,
@@ -55,13 +62,16 @@ export default function Home() {
 
   return (
     <Provider store={store}>
-      <div className="overflow-hidden">
+      <div className="relative overflow-hidden">
         <Header onHeaderClick={(key) => handleScrollTo(key)} />
         <div ref={BannerRef}>
           <HomepageBanner
             onContactClick={() => handleScrollTo("contactUs")}
-            onScrollDownClick={() => handleScrollTo("technology")}
+            onScrollDownClick={() => handleScrollTo("aboutMe")}
           />
+        </div>
+        <div ref={AboutMeRef}>
+          <HomepageAboutMe />
         </div>
         <div ref={TechnologyRef}>
           <HomepageTechnology />
@@ -75,6 +85,7 @@ export default function Home() {
         <div ref={ContactUsRef}>
           <HomepageContactUs />
         </div>
+        <StickyContact />
         <Footer />
       </div>
     </Provider>

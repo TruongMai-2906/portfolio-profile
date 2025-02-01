@@ -26,6 +26,15 @@ export default function Header({ onHeaderClick }: HeaderPropsType) {
           <div
             className={clsx(
               "font-primary text-xl font-bold cursor-pointer transition-all",
+              activeSection === "aboutMe" && "text-orange5"
+            )}
+            onClick={() => onHeaderClick("aboutMe")}
+          >
+            About
+          </div>
+          <div
+            className={clsx(
+              "font-primary text-xl font-bold cursor-pointer transition-all",
               activeSection === "history" && "text-orange5"
             )}
             onClick={() => onHeaderClick("history")}
