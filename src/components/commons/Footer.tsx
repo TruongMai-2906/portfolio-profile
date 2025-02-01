@@ -32,7 +32,7 @@ export default function Footer() {
           />
         </a>
         <a
-          href="/assets/files/Frontend Developer - Be Lam Mai Truong.pdf"
+          href="/assets/files/Web Developer - Be Lam Mai Truong.pdf"
           download={true}
         >
           <Image

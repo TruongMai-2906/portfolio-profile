@@ -1,11 +1,19 @@
 .home-history__content {
-    @apply relative pl-8;
-    width: calc(100% - 1.5rem * 2 - 20%);
+    @apply relative pl-2 lg:pl-8;
+    width: calc(100% - 1.5rem);
+    
+    @screen lg {
+        width: calc(100% - 1.5rem * 2 - 20%);
+    }
 }
 
 .home-history__line {
     @apply absolute w-0.5 h-full bg-dark -translate-x-1/2;
-    left: calc(20% + 1.5rem + 1.5rem / 2);
+    left: calc(1.5rem / 2);
+
+    @screen lg {
+        left: calc(20% + 1.5rem + 1.5rem / 2);
+    }
 }
 
 .sticky-contact-icon {

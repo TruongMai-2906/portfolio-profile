@@ -41,6 +41,18 @@ export default function HomepageProject() {
       link: "https://gangstarny.com/",
     },
     {
+      image: "/assets/images/project-testcon.jpg",
+      title: "TestCon Vietnam 2024",
+      description: "",
+      link: "https://www.testcon.net/",
+    },
+    {
+      image: "/assets/images/project-1k.jpg",
+      title: "Katalon 1K Studio Promo",
+      description: "",
+      link: "https://katalon.com/1k-studio-promo",
+    },
+    {
       image: "/assets/images/project-disney-dreamlight-valley.jpg",
       title: "Disney Dreamlight Valley News",
       description: "",
@@ -93,12 +105,6 @@ export default function HomepageProject() {
       title: "Katalon Enterprise Landing Page",
       description: "",
       link: "https://katalon.com/enterprise",
-    },
-    {
-      image: "/assets/images/project-testcon.jpg",
-      title: "TestCon Vietnam 2024",
-      description: "",
-      link: "https://www.testcon.net/",
     },
     {
       image: "/assets/images/project-web-testing.jpg",
@@ -187,7 +193,7 @@ export default function HomepageProject() {
         </div>
         <h2 className="font-primary text-4xl lg:text-5xl font-bold text-center mt-6 flex gap-4 justify-center items-center">
           <Image
-            className=""
+            className="hidden lg:block"
             src={"assets/images/flash.svg"}
             alt="logo"
             width={60}
@@ -195,7 +201,7 @@ export default function HomepageProject() {
           />
           Transforming Ideas into Interactive Reality
           <Image
-            className=""
+            className="hidden lg:block"
             src={"assets/images/flash.svg"}
             alt="logo"
             width={60}

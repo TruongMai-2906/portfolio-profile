@@ -13,7 +13,7 @@ export default function HomepageAboutMe() {
   const [ref, entry] = useIntersectionObserver({
     threshold: 0.2,
     root: null,
-    rootMargin: "-100px",
+    rootMargin: "0px",
   });
 
   useEffect(() => {
@@ -22,6 +22,8 @@ export default function HomepageAboutMe() {
       setSectionViewed(true);
     }
   }, [dispatch, entry]);
+
+  console.log("about-me", entry?.isIntersecting);
 
   useGSAP(() => {
     if (sectionViewed) {
@@ -42,16 +44,13 @@ export default function HomepageAboutMe() {
 
   return (
     <div ref={ref}>
-      <div
-        className="pt-8 pb-6 lg:pt-16 lg:pb-12 opacity-0 overflow-hidden"
-        ref={root}
-      >
+      <div className="px-x pt-8 pb-6 lg:pt-16 lg:pb-12 opacity-0" ref={root}>
         <div className="font-primary text-xl font-bold tracking-custom text-center text-orange5">
           ABOUT ME
         </div>
         <h2 className="font-primary text-4xl lg:text-5xl font-bold text-center mt-6 flex gap-4 justify-center items-center">
           <Image
-            className=""
+            className="hidden lg:block"
             src={"assets/images/flash.svg"}
             alt="logo"
             width={60}
@@ -59,43 +58,43 @@ export default function HomepageAboutMe() {
           />
           From Dreams to Reality
           <Image
-            className=""
+            className="hidden lg:block"
             src={"assets/images/flash.svg"}
             alt="logo"
             width={60}
             height={60}
           />
         </h2>
-        <div className="relative mt-16 mx-auto w-[1200px] max-w-[90%]">
+        <div className="relative mt-8 lg:mt-16 mx-auto w-[1200px] max-w-full">
           <Image
-            className="absolute top-2/3 -left-8 -translate-x-full rotate-[25deg]"
+            className="hidden lg:block absolute top-2/3 -left-8 -translate-x-full rotate-[25deg]"
             src={"/assets/images/decor-arrow-style2.svg"}
             alt="logo"
             width={100}
             height={100}
           />
           <Image
-            className="absolute top-0 -right-4 translate-x-full"
+            className="hidden lg:block absolute top-0 -right-4 translate-x-full"
             src={"/assets/images/decor-arrow-style3.svg"}
             alt="logo"
             width={100}
             height={100}
           />
-          <div className="p-12 border-2 border-dark/50 rounded-3xl shadow-xl flex gap-12 justify-center">
-            <div className="w-1/3 rounded-2xl overflow-hidden">
+          <div className="p-6 lg:p-12 border-2 border-dark/50 rounded-3xl shadow-xl flex flex-col lg:flex-row gap-6 lg:gap-12 justify-center">
+            <div className="w-full aspect-square lg:aspect-auto lg:w-1/3 rounded-2xl overflow-hidden">
               <Image
-                className="w-full h-auto object-cover"
-                src={"/assets/images/about-me-image2.jpg"}
+                className="w-full h-full lg:h-auto object-cover object-bottom"
+                src={"/assets/images/about-me-image.jpg"}
                 alt="logo"
                 width={1920}
                 height={2560}
               />
             </div>
-            <div className="w-2/3 font-primary text-xl font-normal flex flex-col gap-6">
+            <div className="w-full lg:w-2/3 font-primary text-lg lg:text-xl font-normal flex flex-col gap-6">
               <div>
-                Hi there, I&apos;m Frontend Developer with over 3 years and
-                nearly 4 years of experience building engaging and user-friendly
-                web experiences using modern technologies.
+                Hi there, I&apos;m Frontend Developer with over 3.5 years of
+                experience building engaging and user-friendly web experiences
+                using modern technologies.
               </div>
               <div>
                 Currently, as a Web Developer at Katalon, I partner with the

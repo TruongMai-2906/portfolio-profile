@@ -1,29 +1,29 @@
 export default function StickyContact() {
   return (
-    <div className="fixed bottom-5 right-7 z-50">
-      <div className="flex flex-col justify-center items-center gap-6 my-8">
+    <div className="fixed bottom-5 right-4 lg:right-7 z-50">
+      <div className="flex flex-col justify-center items-center gap-3 lg:gap-6 my-4 lg:my-8">
         <a
-          className="sticky-contact-icon flex flex-col justify-center items-center border-2 border-orange5 w-14 h-14 rounded-full bg-white shadow-lg transition-all hover:bg-orange5"
+          className="sticky-contact-icon flex flex-col justify-center items-center border-2 border-orange5 w-10 h-10 lg:w-14 lg:h-14 rounded-full bg-white shadow-lg transition-all hover:bg-orange5"
           href="mailto:truongbe2906@gmail.com"
           target="_blank"
           rel="noreferrer noopener"
         >
-          <IconMail className="w-8 h-8" />
+          <IconMail className="w-4 h-4 lg:w-8 lg:h-8" />
         </a>
         <a
-          className="sticky-contact-icon flex flex-col justify-center items-center border-2 border-orange5 w-14 h-14 rounded-full bg-white shadow-lg transition-all hover:bg-orange5"
+          className="sticky-contact-icon flex flex-col justify-center items-center border-2 border-orange5 w-10 h-10 lg:w-14 lg:h-14 rounded-full bg-white shadow-lg transition-all hover:bg-orange5"
           href="https://www.linkedin.com/in/truongbelammai/"
           target="_blank"
           rel="noreferrer noopener"
         >
-          <IconLinkedin className="w-8 h-8" />
+          <IconLinkedin className="w-4 h-4 lg:w-8 lg:h-8" />
         </a>
         <a
-          className="sticky-contact-icon-cv flex flex-col justify-center items-center border-2 border-orange5 w-14 h-14 rounded-full bg-white shadow-lg transition-all hover:bg-orange5"
-          href="/assets/files/Frontend Developer - Be Lam Mai Truong.pdf"
+          className="sticky-contact-icon-cv flex flex-col justify-center items-center border-2 border-orange5 w-10 h-10 lg:w-14 lg:h-14 rounded-full bg-white shadow-lg transition-all hover:bg-orange5"
+          href="/assets/files/Web Developer - Be Lam Mai Truong.pdf"
           download={true}
         >
-          <IconCV className="w-8 h-8" />
+          <IconCV className="w-4 h-4 lg:w-8 lg:h-8" />
         </a>
       </div>
     </div>

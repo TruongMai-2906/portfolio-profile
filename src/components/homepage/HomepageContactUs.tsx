@@ -180,13 +180,13 @@ export default function HomepageContactUs() {
 
   return (
     <div ref={ref}>
-      <div className="py-8 lg:py-16 px-x pb-20 relative" ref={root}>
+      <div className="py-8 lg:py-16 px-x pb-20 relative opacity-0" ref={root}>
         <div className="font-primary text-xl font-bold tracking-custom text-center text-orange5">
           CONTACT ME
         </div>
         <h2 className="font-primary text-4xl lg:text-5xl font-bold text-center mt-6 flex gap-4 justify-center items-center">
           <Image
-            className=""
+            className="hidden lg:block"
             src={"assets/images/flash.svg"}
             alt="logo"
             width={60}
@@ -194,7 +194,7 @@ export default function HomepageContactUs() {
           />
           Ready to Transform Ideas Into Interactive Reality?
           <Image
-            className=""
+            className="hidden lg:block"
             src={"assets/images/flash.svg"}
             alt="logo"
             width={60}
@@ -212,7 +212,7 @@ export default function HomepageContactUs() {
         <div className="relative mt-10 lg:mt-16 mx-auto w-full max-w-4xl">
           <Image
             ref={arrowTopLeftRef}
-            className="absolute -top-8 right-full -translate-x-16 rotate-[25deg]"
+            className="hidden lg:block absolute -top-8 right-full -translate-x-16 rotate-[25deg]"
             src={"/assets/images/decor-arrow-style4.svg"}
             alt="logo"
             width={100}
@@ -220,7 +220,7 @@ export default function HomepageContactUs() {
           />
           <Image
             ref={arrowBottomLeftRef}
-            className="absolute bottom-0 right-full -translate-x-16 -rotate-[25deg]"
+            className="hidden lg:block absolute bottom-0 right-full -translate-x-16 -rotate-[25deg]"
             src={"/assets/images/decor-arrow-style4.svg"}
             alt="logo"
             width={100}
@@ -228,7 +228,7 @@ export default function HomepageContactUs() {
           />
           <Image
             ref={arrowTopRightRef}
-            className="absolute -top-8 left-full translate-x-16 rotate-[155deg]"
+            className="hidden lg:block absolute -top-8 left-full translate-x-16 rotate-[155deg]"
             src={"/assets/images/decor-arrow-style4.svg"}
             alt="logo"
             width={100}
@@ -236,7 +236,7 @@ export default function HomepageContactUs() {
           />
           <Image
             ref={arrowBottomRightRef}
-            className="absolute bottom-0 left-full translate-x-16 -rotate-[155deg]"
+            className="hidden lg:block absolute bottom-0 left-full translate-x-16 -rotate-[155deg]"
             src={"/assets/images/decor-arrow-style4.svg"}
             alt="logo"
             width={100}
@@ -313,7 +313,7 @@ export default function HomepageContactUs() {
                   />
                 </a>
                 <a
-                  href="/assets/files/Frontend Developer - Be Lam Mai Truong.pdf"
+                  href="/assets/files/Web Developer - Be Lam Mai Truong.pdf"
                   download={true}
                 >
                   <Image

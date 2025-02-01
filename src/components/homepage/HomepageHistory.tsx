@@ -68,7 +68,7 @@ export default function HomepageHistory() {
         logo: "/assets/images/gameloft.svg",
       },
       {
-        timeline: "7/2023 - 9/2021",
+        timeline: "7/2023 - 10/2021",
         company: "Inotek",
         title: "Intern Frontend Developer",
         description: `
@@ -87,7 +87,7 @@ export default function HomepageHistory() {
   const [ref, entry] = useIntersectionObserver({
     threshold: 0.2,
     root: null,
-    rootMargin: "-100px",
+    rootMargin: "0px",
   });
 
   useEffect(() => {
@@ -122,7 +122,7 @@ export default function HomepageHistory() {
         </div>
         <h2 className="font-primary text-4xl lg:text-5xl font-bold text-center mt-6 flex gap-4 justify-center items-center">
           <Image
-            className=""
+            className="hidden lg:block"
             src={"assets/images/flash.svg"}
             alt="logo"
             width={60}
@@ -130,16 +130,16 @@ export default function HomepageHistory() {
           />
           {pageData.title}
           <Image
-            className=""
+            className="hidden lg:block"
             src={"assets/images/flash.svg"}
             alt="logo"
             width={60}
             height={60}
           />
         </h2>
-        <div className="mt-24 relative">
+        <div className="mt-16 lg:mt-24 relative">
           <div className="home-history__line absolute w-0.5 h-full bg-dark"></div>
-          <div className="flex flex-col gap-24 relative">
+          <div className="flex flex-col gap-16 lg:gap-24 relative">
             {pageData.history.map((item, index) => (
               <HomepageHistoryItem key={index} {...item} />
             ))}
@@ -172,8 +172,8 @@ const HomepageHistoryItem = (props: HomepageHistoryItemDataType) => {
 
   return (
     <div ref={container}>
-      <div className="flex gap-6" ref={ref}>
-        <div className="logo timeline w-1/5 font-primary text-xl font-semibold flex justify-end mt-3 flex-shrink-0">
+      <div className="flex gap-3 lg:gap-6" ref={ref}>
+        <div className="hidden timeline w-1/5 font-primary text-xl font-semibold lg:flex justify-end mt-3 flex-shrink-0">
           {props.timeline}
         </div>
         <div className="dot w-6 mt-4">
@@ -198,8 +198,11 @@ const HomepageHistoryItem = (props: HomepageHistoryItemDataType) => {
             <div className="font-primary text-3xl font-bold mt-0">
               {props.title}
             </div>
+            <div className="font-primary text-lg font-semibold mt-1 lg:hidden">
+              {props.timeline}
+            </div>
             <div
-              className="font-primary text-base font-normal mt-4 flex flex-col gap-2 [&>p>a]:text-orange5 [&>p>a]:underline [&>p>a]:underline-offset-3"
+              className="font-primary text-base font-normal mt-4 flex flex-col gap-4 [&>p>a]:text-orange5 [&>p>a]:underline [&>p>a]:underline-offset-3"
               dangerouslySetInnerHTML={{ __html: props.description }}
             ></div>
           </div>

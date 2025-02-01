@@ -149,7 +149,7 @@ export default function HomepageBanner(props: HomepageBannerPropDataType) {
       </div>
       <div className="flex justify-center gap-6 flex-wrap">
         <a
-          href="/assets/files/Frontend Developer - Be Lam Mai Truong.pdf"
+          href="/assets/files/Web Developer - Be Lam Mai Truong.pdf"
           download={true}
           className="font-primary text-lg font-semibold text-grey px-6 py-2 rounded-3xl cursor-pointer transition-all border-2 border-orange8 bg-orange8 hover:bg-orange5 hover:border-orange5"
         >
