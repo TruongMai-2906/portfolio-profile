@@ -85,7 +85,7 @@ export default function HomepageAboutMe() {
             <div className="w-1/3 rounded-2xl overflow-hidden">
               <Image
                 className="w-full h-auto object-cover"
-                src={"/assets/images/about-me-image.jpg"}
+                src={"/assets/images/about-me-image2.jpg"}
                 alt="logo"
                 width={1920}
                 height={2560}
