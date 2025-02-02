@@ -66,7 +66,7 @@ export default function Header({ onHeaderClick }: HeaderPropsType) {
       </div>
 
       <div className="lg:hidden h-full px-x py-2 flex justify-between items-center relative">
-        <div className="w-32 h-full bg-orange5"></div>
+        <div className="w-32 h-full bg-white"></div>
         <div onClick={() => setIsSidebarActive(!isSidebarActive)}>
           <Image
             src="/assets/images/icon-hamburger.svg"
