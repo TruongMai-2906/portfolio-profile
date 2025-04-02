@@ -92,7 +92,7 @@ export default function HomepageAboutMe() {
             </div>
             <div className="w-full lg:w-2/3 font-primary text-lg lg:text-xl font-normal flex flex-col gap-6">
               <div>
-                Hi there, I&apos;m Frontend Developer with over 3.5 years of
+                Hi there, I&apos;m Frontend Developer with nearly 4 years of
                 experience building engaging and user-friendly web experiences
                 using modern technologies.
               </div>
